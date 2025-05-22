@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmolsem7whbtq"]
+
+[ext_resource type="Texture2D" uid="uid://b4aao2dcggifm" path="res://art/house/house_00.png" id="1_w7ek4"]
+
+[node name="BuildTile" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Area2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_w7ek4")
