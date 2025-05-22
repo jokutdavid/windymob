@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmolsem7whbtq" path="res://build_tile.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://it2w44nxly1t" path="res://road_tile.tscn" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://camera_2d.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_2d.gd" id="3_h2yge"]
 
 [node name="Root" type="Node2D"]
 
