@@ -1,3 +1,35 @@
-[gd_scene format=3 uid="uid://bxq0yedk6a7c0"]
+[gd_scene load_steps=3 format=3 uid="uid://ba8s10n0og28j"]
 
-[node name="Main" type="Node3D"]
+[ext_resource type="PackedScene" uid="uid://bmolsem7whbtq" path="res://build_tile.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://it2w44nxly1t" path="res://road_tile.tscn" id="2_0xm2m"]
+
+[node name="Root" type="Node2D"]
+
+[node name="BuildTiles" type="Node2D" parent="."]
+
+[node name="BuildTile00" parent="BuildTiles" instance=ExtResource("1_ig7tw")]
+
+[node name="BuildTile01" parent="BuildTiles" instance=ExtResource("1_ig7tw")]
+position = Vector2(120, 0)
+
+[node name="BuildTile02" parent="BuildTiles" instance=ExtResource("1_ig7tw")]
+position = Vector2(120, 120)
+
+[node name="BuildTile03" parent="BuildTiles" instance=ExtResource("1_ig7tw")]
+position = Vector2(0, 120)
+
+[node name="RoadTiles" type="Node2D" parent="."]
+
+[node name="RoadTile00" parent="RoadTiles" instance=ExtResource("2_0xm2m")]
+position = Vector2(240, 0)
+
+[node name="RoadTile02" parent="RoadTiles" instance=ExtResource("2_0xm2m")]
+position = Vector2(120, 240)
+rotation = 1.5708
+
+[node name="RoadTile04" parent="RoadTiles" instance=ExtResource("2_0xm2m")]
+position = Vector2(240, 240)
+rotation = 1.5708
+
+[node name="RoadTile03" parent="RoadTiles" instance=ExtResource("2_0xm2m")]
+position = Vector2(240, 120)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://it2w44nxly1t"]
+
+[ext_resource type="Texture2D" uid="uid://bjsi0gdjh6lca" path="res://art/road/road_00_04.png" id="1_5s150"]
+
+[node name="RoadTile" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Area2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_5s150")
