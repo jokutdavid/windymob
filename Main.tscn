@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d3q6vukrp1w8v" path="res://terrain_tiles.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_2d.gd" id="3_h2yge"]
 
-[node name="Root" type="Node2D"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_r0du0")
 
 [node name="Game" type="Node2D" parent="."]

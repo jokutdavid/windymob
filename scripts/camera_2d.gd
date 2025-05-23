@@ -5,12 +5,10 @@ var scroll_speed = 400  # pixels per second
 var drag_pos = Vector2.ZERO
 var dragging: bool
 
-var TerrainTiles
-
-func _ready():
-	TerrainTiles = get_node("../Game/TerrainTiles")
 
 func _process(delta):
+	var Main = get_parent()
+	
 	var new_pos = position
 	
 	var input_vector = Vector2.ZERO # lets a vector and gives it direction based on input from the user
@@ -43,8 +41,9 @@ func _process(delta):
 	
 	
 	#at the end of frame makes sure that the viewport doesn't exit the usable frame
-	position.x = max(get_viewport().size.x / zoom.x / 2 - get_viewport().size.x / zoom.x / 7, min(new_pos.x, 120 * 10 - get_viewport().size.x / zoom.x / 7 - get_viewport().size.x / zoom.x / 2))
-	position.y = max(get_viewport().size.y / zoom.y / 2 - get_viewport().size.y / zoom.y / 7, min(new_pos.y, 1500))
+	print(get_viewport().size.x / 12)
+	position.x = max(get_viewport().size.x / zoom.x / 2 - get_viewport().size.x / zoom.x / 12, min(new_pos.x, Main.row_cols.x * 120 - get_viewport().size.x / 2 / zoom.x + get_viewport().size.x / 12 / zoom.x))
+	position.y = max(get_viewport().size.y / zoom.y / 2 - get_viewport().size.y / zoom.y / 12, min(new_pos.y, Main.row_cols.y * 120 - get_viewport().size.y / 2 / zoom.y + get_viewport().size.y / 12 / zoom.y))
 	
 	
 	

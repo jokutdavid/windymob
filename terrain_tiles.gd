@@ -5,9 +5,12 @@ var terrain_grid : Array = []
 
 
 func _ready():
-	for x in range(10):
+	var Main = get_parent().get_parent()
+	
+	
+	for x in range(Main.row_cols.x):
 		terrain_grid.append([])
-		for y in range(10):
+		for y in range(Main.row_cols.y):
 			var terrain_child = TerrainChild.instantiate()
 			add_child(terrain_child)
 			terrain_child.position = Vector2(x, y) * 120
