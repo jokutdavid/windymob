@@ -1,41 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://ba8s10n0og28j"]
 
-[ext_resource type="PackedScene" uid="uid://bmolsem7whbtq" path="res://build_tile.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://it2w44nxly1t" path="res://road_tile.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://ber26ejbwc8vw" path="res://main.gd" id="1_r0du0"]
+[ext_resource type="Script" uid="uid://d3q6vukrp1w8v" path="res://terrain_tiles.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_2d.gd" id="3_h2yge"]
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_r0du0")
 
 [node name="Game" type="Node2D" parent="."]
 
 [node name="RoadTiles" type="Node2D" parent="Game"]
 
-[node name="RoadTile00" parent="Game/RoadTiles" instance=ExtResource("2_0xm2m")]
-position = Vector2(240, 0)
-
-[node name="RoadTile02" parent="Game/RoadTiles" instance=ExtResource("2_0xm2m")]
-position = Vector2(120, 240)
-rotation = 1.5708
-
-[node name="RoadTile04" parent="Game/RoadTiles" instance=ExtResource("2_0xm2m")]
-position = Vector2(240, 240)
-rotation = 1.5708
-
-[node name="RoadTile03" parent="Game/RoadTiles" instance=ExtResource("2_0xm2m")]
-position = Vector2(240, 120)
-
 [node name="BuildTiles" type="Node2D" parent="Game"]
 
-[node name="BuildTile00" parent="Game/BuildTiles" instance=ExtResource("1_ig7tw")]
-
-[node name="BuildTile01" parent="Game/BuildTiles" instance=ExtResource("1_ig7tw")]
-position = Vector2(120, 0)
-
-[node name="BuildTile02" parent="Game/BuildTiles" instance=ExtResource("1_ig7tw")]
-position = Vector2(120, 120)
-
-[node name="BuildTile03" parent="Game/BuildTiles" instance=ExtResource("1_ig7tw")]
-position = Vector2(0, 120)
+[node name="TerrainTiles" type="Node2D" parent="Game"]
+script = ExtResource("1_uu6xs")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1061, 319)

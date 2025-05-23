@@ -38,8 +38,19 @@ func _process(delta):
 		drag_pos = (drag_pos + mouse_pos) / 2 
 	
 	
+	
 	#at the end of frame makes sure that the viewport doesn't exit the usable frame
 	position.x = max(800, min(new_pos.x, 1500))
 	position.y = max(300, min(new_pos.y, 1500))
-	print(str(position.x) + ":" + str(position.y))
 	
+	
+func _input(event):
+	var changed_zoom = zoom
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			changed_zoom = changed_zoom * 1.2
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			changed_zoom = changed_zoom * 0.8
+	
+	if changed_zoom.x > 0.3 and changed_zoom.x < 12:
+		zoom = changed_zoom
