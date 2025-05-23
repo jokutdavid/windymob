@@ -1,6 +1,6 @@
 extends Camera2D
 
-var scroll_speed = 400  # pixels per second
+var scroll_speed = 800  # pixels per second
 
 var drag_pos = Vector2.ZERO
 var dragging: bool
@@ -22,7 +22,7 @@ func _process(delta):
 		input_vector.y -= 1
 
 	input_vector = input_vector.normalized() # noramlises the values, and applies them to position
-	new_pos += input_vector * scroll_speed * delta
+	new_pos += input_vector * scroll_speed * delta / zoom.x
 	
 	var mouse_pos = get_viewport().get_mouse_position() # gets the mouse position in the viewport
 
@@ -40,16 +40,16 @@ func _process(delta):
 	
 	
 	
-	#at the end of frame makes sure that the viewport doesn't exit the usable frame
-	print(get_viewport().size.x / 12)
-	position.x = max(get_viewport().size.x / zoom.x / 2 - get_viewport().size.x / zoom.x / 12, min(new_pos.x, Main.row_cols.x * 120 - get_viewport().size.x / 2 / zoom.x + get_viewport().size.x / 12 / zoom.x))
-	position.y = max(get_viewport().size.y / zoom.y / 2 - get_viewport().size.y / zoom.y / 12, min(new_pos.y, Main.row_cols.y * 120 - get_viewport().size.y / 2 / zoom.y + get_viewport().size.y / 12 / zoom.y))
+	#at the end of frame makes sure that the viewport doesn't exit the usable frame using a buffer
+	var buffer = get_viewport().size.x / zoom.x / 32
+	position.x = max(get_viewport().size.x / zoom.x / 2 - buffer, min(new_pos.x, Main.row_cols.x * 120 - get_viewport().size.x / 2 / zoom.x + buffer))
+	position.y = max(get_viewport().size.y / zoom.y / 2 - buffer, min(new_pos.y, Main.row_cols.y * 120 - get_viewport().size.y / 2 / zoom.y + buffer))
 	
 	
 	
 func _input(event):
 	var changed_zoom = zoom
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton: #changes zoom based on scroll
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			changed_zoom = changed_zoom * 1.1
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
