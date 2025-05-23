@@ -5,7 +5,10 @@ var scroll_speed = 400  # pixels per second
 var drag_pos = Vector2.ZERO
 var dragging: bool
 
+var TerrainTiles
 
+func _ready():
+	TerrainTiles = get_node("../Game/TerrainTiles")
 
 func _process(delta):
 	var new_pos = position
@@ -34,23 +37,24 @@ func _process(delta):
 		dragging = false
 			
 	if dragging: # applies position change if draggingand incrementally resets drag origin
-		new_pos += (drag_pos - mouse_pos) * delta * 30
-		drag_pos = (drag_pos + mouse_pos) / 2 
+		new_pos += (drag_pos - mouse_pos) / zoom.x
+		drag_pos = mouse_pos
 	
 	
 	
 	#at the end of frame makes sure that the viewport doesn't exit the usable frame
-	position.x = max(800, min(new_pos.x, 1500))
-	position.y = max(300, min(new_pos.y, 1500))
+	position.x = max(get_viewport().size.x / zoom.x / 2 - get_viewport().size.x / zoom.x / 7, min(new_pos.x, 120 * 10 - get_viewport().size.x / zoom.x / 7 - get_viewport().size.x / zoom.x / 2))
+	position.y = max(get_viewport().size.y / zoom.y / 2 - get_viewport().size.y / zoom.y / 7, min(new_pos.y, 1500))
+	
 	
 	
 func _input(event):
 	var changed_zoom = zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			changed_zoom = changed_zoom * 1.2
+			changed_zoom = changed_zoom * 1.1
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			changed_zoom = changed_zoom * 0.8
+			changed_zoom = changed_zoom * 0.9
 	
-	if changed_zoom.x > 0.3 and changed_zoom.x < 12:
+	if changed_zoom.x > 0.6 and changed_zoom.x < 2.5:
 		zoom = changed_zoom
