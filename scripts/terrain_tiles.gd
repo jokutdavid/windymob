@@ -1,6 +1,6 @@
 extends Node2D
 
-var TerrainChild = preload("res://terrain_tile.tscn")
+var TerrainChild = preload("res://scenes/terrain_tile.tscn")
 var terrain_grid : Array = []
 
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://qjid15y3rmo2"]
+
+[ext_resource type="Script" uid="uid://bn5qlvisujls3" path="res://scripts/human.gd" id="1_cwf78"]
+[ext_resource type="Texture2D" uid="uid://bgc36g1uq8da5" path="res://art/creatures/humans/human_00.png" id="1_swaxu"]
+
+[node name="Human" type="Node2D"]
+script = ExtResource("1_cwf78")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Area2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_swaxu")
