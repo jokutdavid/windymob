@@ -7,6 +7,6 @@
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Area2D"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 120.0
+offset_bottom = 120.0
 texture = ExtResource("1_14ndr")

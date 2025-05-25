@@ -1,6 +1,6 @@
 extends Node2D
 
-var tile_width = 120
+@export var tile_width = 120
 @export var row_cols = Vector2i.ZERO
 
 func _process(delta):

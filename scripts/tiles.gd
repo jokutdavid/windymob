@@ -13,5 +13,5 @@ func _ready():
 		for y in range(Main.row_cols.y):
 			var terrain_child = TerrainChild.instantiate()
 			add_child(terrain_child)
-			terrain_child.position = Vector2(x, y) * 120
+			terrain_child.position = Vector2(x, y) * get_parent().get_parent().tile_width
 			terrain_grid[x].append(terrain_child)
