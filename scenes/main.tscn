@@ -14,9 +14,9 @@ row_cols = Vector2i(24, 16)
 [node name="TilesNode" type="Node2D" parent="Game"]
 script = ExtResource("2_jyhfs")
 
-[node name="Creatures" type="Node2D" parent="Game"]
+[node name="People" type="Node2D" parent="Game"]
 
-[node name="Human" parent="Game/Creatures" instance=ExtResource("3_jyhfs")]
+[node name="Human" parent="Game/People" instance=ExtResource("3_jyhfs")]
 position = Vector2(60, 60)
 
 [node name="Camera2D" type="Camera2D" parent="."]
