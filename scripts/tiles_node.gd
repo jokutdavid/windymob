@@ -1,53 +1,36 @@
 extends Node2D
 
-var TileChild = preload("res://scenes/tile.tscn")
+var Tile = preload("res://scenes/tile.tscn")
 var tile_grid : Array = []
 
-var astar = AStar2D.new()
-
-func get_point_id(x: int, y: int, grid_height: int) -> int:
-	return x + y * grid_height
+var astar = AStarGrid2D.new()
+var Main
 
 func _ready():
+	Main = get_parent().get_parent()
 #	A* setup
-	var Main = get_parent().get_parent()
+	astar.size = Main.row_cols
+	astar.cell_size = Vector2(Main.tile_width, Main.tile_width)
+	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar.update()
 	
-	for x in range(Main.row_cols.x):
+	
+	for y in Main.row_cols.y:
 		tile_grid.append([])
-		for y in range(Main.row_cols.y):
-			var tile_child = TileChild.instantiate()
+		for x in Main.row_cols.x:
+			var tile_child = Tile.instantiate()
+			tile_child.position = Vector2(x, y) * Main.tile_width
 			add_child(tile_child)
 			
-			if y > 7 or (x == 6 and y < 5):
-				tile_child.current_type = tile_child.tile_type.shallow_water
+			tile_child.id = Vector2(x, y)
+			
+			if y > 8 or (x == 8 and y < 4):
+				tile_child.type = tile_child.tile_type.shallow_water
+				astar.set_point_solid(Vector2(x, y), true)
 			else:
-				tile_child.current_type = tile_child.tile_type.dirt
+				tile_child.type = tile_child.tile_type.dirt
+				astar.set_point_solid(Vector2(x, y), false)
 			
-			tile_child.position = Vector2(x, y) * Main.tile_width
-			tile_grid[x].append(tile_child)
-
-			var point_id = get_point_id(x, y, Main.row_cols.y)
-			astar.add_point(point_id, Vector2(x, y) * Main.tile_width)
-			
-
+			tile_grid[y].append(tile_child)
 	
-	
-	for x in range(Main.row_cols.x):
-		for y in range(Main.row_cols.y):
-			var current_id = get_point_id(x, y, Main.row_cols.y)
-			
-			var left_id = get_point_id(x - 1, y, Main.row_cols.y)
-			if x > 0 and tile_grid[x - 1][y].current_type == tile_grid[0][0].tile_type.dirt:
-				astar.connect_points(current_id, left_id)
-				
-			if x < Main.row_cols.x - 1 and tile_grid[x + 1][y].current_type == tile_grid[0][0].tile_type.dirt:
-				var right_id = get_point_id(x + 1, y, Main.row_cols.y)
-				astar.connect_points(current_id, right_id)
-				
-			if y > 0 and tile_grid[x][y - 1].current_type == tile_grid[0][0].tile_type.dirt:
-				var up_id = get_point_id(x, y - 1, Main.row_cols.y)
-				astar.connect_points(current_id, up_id)
-				
-			if y < Main.row_cols.y - 1 and tile_grid[x][y + 1].current_type == tile_grid[0][0].tile_type.dirt:
-				var right_id = get_point_id(x, y + 1, Main.row_cols.y)
-				astar.connect_points(current_id, right_id)
+	astar.update()
