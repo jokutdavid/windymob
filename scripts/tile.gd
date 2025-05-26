@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var current_type = tile_type.dirt
+var id : int
 
 enum tile_type {
 	dirt,

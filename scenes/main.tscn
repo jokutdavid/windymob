@@ -19,7 +19,7 @@ script = ExtResource("2_jyhfs")
 [node name="Creatures" type="Node2D" parent="Game"]
 
 [node name="Human" parent="Game/Creatures" instance=ExtResource("3_jyhfs")]
-speed = 100
+position = Vector2(60, 60)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
