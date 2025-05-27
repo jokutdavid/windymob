@@ -1,15 +1,28 @@
 extends Node2D
 
-@export var type = tile_type.dirt
+@export var type = ttp.dirt
+var level = 1
+
 var id : Vector2
 
-var old_type = tile_type.none
+var old_type = ttp.none
 
-enum tile_type {
+enum ttp {
 	none,
 	dirt,
-	shallow_water,
+	water,
 }
+
+func return_enum_name(type: ttp) -> String:
+	var result
+	match type:
+		ttp.dirt: 
+			result = "dirt"
+		ttp.water:
+			result = "water"
+		_:
+			result = "na"
+	return result
 
 func randomize_texture_rotations():
 	match randi_range(0, 3):
@@ -24,14 +37,10 @@ func randomize_texture_rotations():
 
 func update_sprite():
 	var texture_rect = $Area2D/TextureRect
-	var texture : Texture
-	match type:
-		tile_type.dirt:
-			texture = preload("res://art/terrain/dirt_01.png")
-		tile_type.shallow_water:
-			texture = preload("res://art/terrain/shallow_water_01.png")
-		_:
-			texture = preload("res://art/terrain/dirt_01.png")
+	var name = return_enum_name(type)
+	var path = "res://art/tiles/" + name + "_" + str(level) + ".png"
+	var texture = load(path)
+	
 	texture_rect.texture = texture
 
 func _ready():

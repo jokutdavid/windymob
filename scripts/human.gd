@@ -8,7 +8,7 @@ var path_index = 0
 func _ready():
 	TilesNode = get_parent().get_node("../TilesNode")
 	
-	path = TilesNode.astar.get_point_path(Vector2(0, 0), Vector2(10, 0))
+	path = TilesNode.hastar.get_point_path(Vector2(0, 0), Vector2(10, 0))
 	
 	
 func _process(delta):

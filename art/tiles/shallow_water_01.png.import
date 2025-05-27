@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcl0uyia1e5io"
-path="res://.godot/imported/road_00_03.png-2f37df3bc81517df3e74d21818b7b7d6.ctex"
+uid="uid://cmxklq20dkfgl"
+path="res://.godot/imported/shallow_water_01.png-96968698bf937e307ecf0bde7bfdd927.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/road/road_00_03.png"
-dest_files=["res://.godot/imported/road_00_03.png-2f37df3bc81517df3e74d21818b7b7d6.ctex"]
+source_file="res://art/tiles/shallow_water_01.png"
+dest_files=["res://.godot/imported/shallow_water_01.png-96968698bf937e307ecf0bde7bfdd927.ctex"]
 
 [params]
 

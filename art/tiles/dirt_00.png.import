@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5xyqrmcnq2a1"
-path="res://.godot/imported/road_00_01.png-2a7c5900e8665c623ebdbac6a25354ab.ctex"
+uid="uid://bhbipsa205ink"
+path="res://.godot/imported/dirt_00.png-550694e6b8ac9fa8b6d27d252d6dea18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/road/road_00_01.png"
-dest_files=["res://.godot/imported/road_00_01.png-2a7c5900e8665c623ebdbac6a25354ab.ctex"]
+source_file="res://art/tiles/dirt_00.png"
+dest_files=["res://.godot/imported/dirt_00.png-550694e6b8ac9fa8b6d27d252d6dea18.ctex"]
 
 [params]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba8s10n0og28j"]
+[gd_scene load_steps=6 format=3 uid="uid://ba8s10n0og28j"]
 
 [ext_resource type="Script" uid="uid://ber26ejbwc8vw" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://d3q6vukrp1w8v" path="res://scripts/tiles_node.gd" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://qjid15y3rmo2" path="res://scenes/human.tscn" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_2d.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://ctyn22npyv884" path="res://scripts/gui.gd" id="5_tbgi4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sugp2")
@@ -21,6 +22,13 @@ position = Vector2(60, 60)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-position_smoothing_enabled = true
 position_smoothing_speed = 30.0
 script = ExtResource("3_tbgi4")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("5_tbgi4")
+
+[node name="FPSCounter" type="TextEdit" parent="GUI"]
+offset_right = 78.0
+offset_bottom = 40.0
+text = "59,9 FPS"

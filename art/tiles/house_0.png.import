@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmxklq20dkfgl"
-path="res://.godot/imported/shallow_water_01.png-2b70f0bbaccd6aed863a12f527931b41.ctex"
+uid="uid://baalcqrdgwv8u"
+path="res://.godot/imported/house_0.png-05ed3bdd779bae5864513ae1ff157663.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/terrain/shallow_water_01.png"
-dest_files=["res://.godot/imported/shallow_water_01.png-2b70f0bbaccd6aed863a12f527931b41.ctex"]
+source_file="res://art/tiles/house_0.png"
+dest_files=["res://.godot/imported/house_0.png-05ed3bdd779bae5864513ae1ff157663.ctex"]
 
 [params]
 

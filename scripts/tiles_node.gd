@@ -3,16 +3,16 @@ extends Node2D
 var Tile = preload("res://scenes/tile.tscn")
 var tile_grid : Array = []
 
-var astar = AStarGrid2D.new()
+var hastar = AStarGrid2D.new() # hastar -> human astar (pathfinding A* for humans)
 var Main
 
 func _ready():
 	Main = get_parent().get_parent()
 #	A* setup
-	astar.size = Main.row_cols
-	astar.cell_size = Vector2(Main.tile_width, Main.tile_width)
-	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	astar.update()
+	hastar.size = Main.row_cols
+	hastar.cell_size = Vector2(Main.tile_width, Main.tile_width)
+	hastar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	hastar.update()
 	
 	
 	for y in Main.row_cols.y:
@@ -23,14 +23,15 @@ func _ready():
 			add_child(tile_child)
 			
 			tile_child.id = Vector2(x, y)
-			
+		
+			tile_child.level = 1
 			if y > 8 or (x == 8 and y < 4):
-				tile_child.type = tile_child.tile_type.shallow_water
-				astar.set_point_solid(Vector2(x, y), true)
+				tile_child.type = tile_child.ttp.water
+				hastar.set_point_solid(Vector2(x, y), true)
 			else:
-				tile_child.type = tile_child.tile_type.dirt
-				astar.set_point_solid(Vector2(x, y), false)
+				tile_child.type = tile_child.ttp.dirt
+				hastar.set_point_solid(Vector2(x, y), false)
 			
 			tile_grid[y].append(tile_child)
 	
-	astar.update()
+	hastar.update()
