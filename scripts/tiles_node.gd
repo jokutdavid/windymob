@@ -24,13 +24,21 @@ func _ready():
 			
 			tile_child.id = Vector2(x, y)
 		
-			tile_child.level = 1
-			if y > 8 or (x == 8 and y < 4):
-				tile_child.type = tile_child.ttp.water
-				hastar.set_point_solid(Vector2(x, y), true)
-			else:
-				tile_child.type = tile_child.ttp.dirt
-				hastar.set_point_solid(Vector2(x, y), false)
+			
+		
+			var solid := false
+			var level: int
+			if y > 9 or (x == 8 and y < 7) or [Vector2(9, 3), Vector2(10, 3)].has(Vector2(x, y)): #water
+				level = -1
+				solid = true
+			elif y > 6: #sand
+				level = 0
+			else: #dirt
+				level = 1
+			
+			tile_child.id = Vector2(x, y)
+			tile_child.level = level
+			hastar.set_point_solid(Vector2(x, y), solid)
 			
 			tile_grid[y].append(tile_child)
 	
