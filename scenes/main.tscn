@@ -19,7 +19,7 @@ shallow_ocean = 2.4
 sand = 2.8
 dirt = 4.6
 hill = 5.6
-mountain = 7.4
+mountain = 6.8
 
 [node name="People" type="Node2D" parent="Game"]
 

@@ -18,6 +18,8 @@ var tile_grid : Array = []
 var hastar = AStarGrid2D.new() # hastar -> human astar (pathfinding A* for humans)
 var Main
 
+
+
 func _ready():
 	Main = get_parent().get_parent()
 #	A* setup
@@ -43,7 +45,6 @@ func _ready():
 		
 			
 		
-			var solid := true
 			var level: int
 			
 			var value = noise.get_noise_2d(x, y) + 1
@@ -63,13 +64,46 @@ func _ready():
 				level = 3
 			elif value <= mountain_peak / 4:
 				level = 4
+			else:
+				level = 99
 			
 			
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
 			tile_child.type = tile_child.ttp.terrain
-			hastar.set_point_solid(Vector2(x, y), solid)
+			hastar.set_point_solid(Vector2(x, y), ![0, 1, 2].has(tile_child.level))
 			
 			tile_grid[y].append(tile_child)
 	
 	hastar.update()
+	
+	surround_water_with_sand()
+
+
+func surround_water_with_sand():
+	var grid_height = Main.row_cols.y
+	var grid_width = Main.row_cols.x
+	
+	
+	for y in grid_height:
+		for x in grid_width:
+			if tile_grid[y][x].level < 0:
+				if y > 0:
+					if tile_grid[y - 1][x].level > 0:
+						tile_grid[y - 1][x].level = 0
+				
+				if y < grid_height - 1:
+					if tile_grid[y + 1][x].level > 0:
+						tile_grid[y + 1][x].level = 0
+				
+				if x > 0:
+					if tile_grid[y][x - 1].level > 0:
+						tile_grid[y][x - 1].level = 0
+				
+				if x < grid_width - 1:
+					if tile_grid[y][x + 1].level > 0:
+						tile_grid[y][x + 1].level = 0
+			
+
+func get_coord_id(x: int, y: int, width: int):
+	return x + y * width
