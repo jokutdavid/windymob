@@ -1,5 +1,17 @@
 extends Node2D
 
+#height shit for noise map or smt
+@export_range(0, 8, 0.2) var deep_ocean := 1.0
+@export_range(0, 8, 0.2) var close_ocean := 2.0
+@export_range(0, 8, 0.2) var shallow_ocean := 3.0
+
+@export_range(0, 8, 0.2) var sand := 4.0
+@export_range(0, 8, 0.2) var dirt := 5.0
+
+@export_range(0, 8, 0.2) var hill := 6.0
+@export_range(0, 8, 0.2) var mountain := 7.0
+@export_range(0, 8, 0.2) var mountain_peak := 8.0
+
 var Tile = preload("res://scenes/tile.tscn")
 var tile_grid : Array = []
 
@@ -14,6 +26,11 @@ func _ready():
 	hastar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	hastar.update()
 	
+	var noise = FastNoiseLite.new()
+	noise.seed = randi()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	noise.frequency = 0.05
+	
 	
 	for y in Main.row_cols.y:
 		tile_grid.append([])
@@ -26,18 +43,31 @@ func _ready():
 		
 			
 		
-			var solid := false
+			var solid := true
 			var level: int
-			if y > 9 or (x == 8 and y < 7) or [Vector2(9, 3), Vector2(10, 3)].has(Vector2(x, y)): #water
+			
+			var value = noise.get_noise_2d(x, y) + 1
+			if value <= deep_ocean / 4:
+				level = -3
+			elif value <= close_ocean / 4:
+				level = -2
+			elif value <= shallow_ocean / 4:
 				level = -1
-				solid = true
-			elif y > 6: #sand
+			elif value <= sand / 4:
 				level = 0
-			else: #dirt
+			elif value <= dirt / 4:
 				level = 1
+			elif value <= hill / 4:
+				level = 2
+			elif value <= mountain / 4:
+				level = 3
+			elif value <= mountain_peak / 4:
+				level = 4
+			
 			
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
+			tile_child.type = tile_child.ttp.terrain
 			hastar.set_point_solid(Vector2(x, y), solid)
 			
 			tile_grid[y].append(tile_child)
