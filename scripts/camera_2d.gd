@@ -5,6 +5,8 @@ var scroll_speed = 800  # pixels per second
 var drag_pos = Vector2.ZERO
 var dragging: bool
 
+@export var ZOOM_MIN = 0.4
+@export var ZOOM_MAX = 2.5
 
 func _process(delta):
 	var Main = get_parent()
@@ -55,5 +57,5 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			changed_zoom = changed_zoom * 0.9
 	
-	if changed_zoom.x > 0.6 and changed_zoom.x < 2.5:
+	if changed_zoom.x > ZOOM_MIN and changed_zoom.x < ZOOM_MAX:
 		zoom = changed_zoom

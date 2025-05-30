@@ -8,12 +8,18 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sugp2")
-row_cols = Vector2i(24, 16)
+row_cols = Vector2i(64, 32)
 
 [node name="Game" type="Node2D" parent="."]
 
 [node name="TilesNode" type="Node2D" parent="Game"]
 script = ExtResource("2_jyhfs")
+close_ocean = 1.4
+shallow_ocean = 2.4
+sand = 2.8
+dirt = 4.6
+hill = 5.6
+mountain = 6.8
 
 [node name="People" type="Node2D" parent="Game"]
 
