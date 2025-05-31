@@ -71,7 +71,7 @@ func _ready():
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
 			tile_child.type = tile_child.ttp.terrain
-			hastar.set_point_solid(Vector2(x, y), ![0, 1, 2].has(tile_child.level))
+			hastar.set_point_solid(Vector2(x, y), !range(0, 4).has(tile_child.level))
 			
 			tile_grid[y].append(tile_child)
 	
