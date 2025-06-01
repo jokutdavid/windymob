@@ -71,11 +71,13 @@ func _ready():
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
 			tile_child.type = tile_child.ttp.terrain
-			hastar.set_point_solid(Vector2(x, y), !range(0, 4).has(tile_child.level))
+			hastar.set_point_solid(Vector2(x, y), !range(0, 3).has(tile_child.level))
 			
 			tile_grid[y].append(tile_child)
 	
 	hastar.update()
+	
+	
 	
 	surround_water_with_sand()
 
@@ -104,6 +106,3 @@ func surround_water_with_sand():
 					if tile_grid[y][x + 1].level > 0:
 						tile_grid[y][x + 1].level = 0
 			
-
-func get_coord_id(x: int, y: int, width: int):
-	return x + y * width
