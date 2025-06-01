@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dhocflfdcncho"
+path="res://.godot/imported/house_demo.obj-2f89fb507a1903c1311508c458ab7b39.mesh"
+
+[deps]
+
+files=["res://.godot/imported/house_demo.obj-2f89fb507a1903c1311508c458ab7b39.mesh"]
+
+source_file="res://art/tiles/builds/house_demo.obj"
+dest_files=["res://.godot/imported/house_demo.obj-2f89fb507a1903c1311508c458ab7b39.mesh", "res://.godot/imported/house_demo.obj-2f89fb507a1903c1311508c458ab7b39.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 #height shit for noise map or smt
 @export_range(0, 8, 0.2) var deep_ocean := 1.0
@@ -38,11 +38,11 @@ func _ready():
 		tile_grid.append([])
 		for x in Main.row_cols.x:
 			var tile_child = Tile.instantiate()
-			tile_child.position = Vector2(x, y) * Main.tile_width
+			tile_child.position = Vector3(x, 0, y) * Main.tile_width
 			add_child(tile_child)
 			
 			tile_child.id = Vector2(x, y)
-		
+			
 			
 		
 			var level: int
@@ -67,10 +67,12 @@ func _ready():
 			else:
 				level = 99
 			
-			
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
+			
 			tile_child.type = tile_child.ttp.terrain
+			tile_child.update_sprite()
+			
 			hastar.set_point_solid(Vector2(x, y), !range(0, 3).has(tile_child.level))
 			
 			tile_grid[y].append(tile_child)

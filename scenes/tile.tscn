@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3vx2qxh4e8sq"]
+[gd_scene load_steps=5 format=3 uid="uid://b3vx2qxh4e8sq"]
 
 [ext_resource type="Script" uid="uid://gnr82u435bg" path="res://scripts/tile.gd" id="1_ywnoi"]
-[ext_resource type="Texture2D" uid="uid://blfjphtj3pyoo" path="res://art/tiles/missing_texture.png" id="2_ywnoi"]
 
-[node name="Tile" type="Node2D"]
+[sub_resource type="QuadMesh" id="QuadMesh_ywnoi"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3dk36"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jy7pm"]
+albedo_texture = SubResource("CompressedTexture2D_3dk36")
+
+[node name="Tile" type="Node3D"]
 script = ExtResource("1_ywnoi")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(60, 60)
-
-[node name="TextureRect" type="TextureRect" parent="Area2D"]
-offset_left = -60.0
-offset_top = -60.0
-offset_right = 60.0
-offset_bottom = 60.0
-pivot_offset = Vector2(60, 60)
-texture = ExtResource("2_ywnoi")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(128, 0, 0, 0, -5.59506e-06, 128, 0, -128, -5.59506e-06, 64, 0, 64)
+mesh = SubResource("QuadMesh_ywnoi")
+surface_material_override/0 = SubResource("StandardMaterial3D_jy7pm")

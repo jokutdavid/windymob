@@ -1,11 +1,11 @@
-extends Node2D
+extends Node3D
 
 @export var type = ttp.none
-@export var level = 1
+@export var level: int
 
 var id : Vector2
-
 var old_type = ttp.none
+var old_level = -999
 
 enum ttp {
 	terrain,
@@ -17,41 +17,42 @@ enum ttp {
 func randomize_texture_rotations():
 	match randi_range(0, 3):
 		0:
-			$Area2D/TextureRect.rotation_degrees = 0
+			$MeshInstance3D.rotation_degrees.z = 0
 		1:
-			$Area2D/TextureRect.rotation_degrees = 90
+			$MeshInstance3D.rotation_degrees.z = 90
 		2:
-			$Area2D/TextureRect.rotation_degrees = 180
+			$MeshInstance3D.rotation_degrees.z = 180
 		3:
-			$Area2D/TextureRect.rotation_degrees = 270
+			$MeshInstance3D.rotation_degrees.z = 270
 
-func update_sprite():
-	var texture_rect = $Area2D/TextureRect
+func update_sprite():	
+	var material = StandardMaterial3D.new()
+	
+	# If no override material exists yet, create one	
 	var path: String
 	match type:
 		ttp.terrain:
 			path = "res://art/tiles/terrain/terrain_" + str(level) + ".png"
 		_:
 			path = "res://art/tiles/missing_texture.png"
-	var IMAGE = FileAccess.open(path, FileAccess.READ)
-	var texture
-	if IMAGE:
+	
+	var file = FileAccess.open(path, FileAccess.READ)
+	var texture: Texture2D
+	
+	if file:
 		texture = load(path)
 	else:
 		texture = load("res://art/tiles/missing_texture.png")
 	
-	
-	texture_rect.texture = texture
+	material.albedo_texture = texture
+	$MeshInstance3D.set_surface_override_material(0, material)
 
 func _ready():
 	randomize_texture_rotations()
 	pass
-	draw
-
-var counter := 0
+	
 func _process(delta):
-	counter += delta
-	if type != old_type or counter > 10:
-		counter = 0
+	if level != old_level or type != old_type:
+		old_level = level
 		old_type = type
 		update_sprite()

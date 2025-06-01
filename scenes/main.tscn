@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://ber26ejbwc8vw" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://d3q6vukrp1w8v" path="res://scripts/tiles_node.gd" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://qjid15y3rmo2" path="res://scenes/human.tscn" id="3_jyhfs"]
-[ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_2d.gd" id="3_tbgi4"]
+[ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_3d.gd" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://m852tmojdan3" path="res://scenes/building.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://ctyn22npyv884" path="res://scripts/gui.gd" id="5_tbgi4"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node3D"]
 script = ExtResource("1_sugp2")
 row_cols = Vector2i(64, 32)
 
-[node name="Game" type="Node2D" parent="."]
+[node name="Game" type="Node3D" parent="."]
 
-[node name="TilesNode" type="Node2D" parent="Game"]
+[node name="TilesNode" type="Node3D" parent="Game"]
 script = ExtResource("2_jyhfs")
 close_ocean = 1.4
 shallow_ocean = 2.4
@@ -21,18 +21,16 @@ dirt = 4.6
 hill = 5.6
 mountain = 6.4
 
-[node name="Buildings" type="Node2D" parent="Game"]
+[node name="Buildings" type="Node3D" parent="Game"]
 
-[node name="People" type="Node2D" parent="Game"]
+[node name="Building" parent="Game/Buildings" instance=ExtResource("3_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
 
-[node name="Human" parent="Game/People" instance=ExtResource("3_jyhfs")]
-position = Vector2(60, 60)
-speed = 500
+[node name="People" type="Node3D" parent="Game"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position_smoothing_speed = 30.0
-script = ExtResource("3_tbgi4")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.011, 11, 0.052)
+script = ExtResource("3_jyhfs")
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = ExtResource("5_tbgi4")
@@ -41,3 +39,7 @@ script = ExtResource("5_tbgi4")
 offset_right = 78.0
 offset_bottom = 40.0
 text = "59,9 FPS"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.53, 0)
+light_bake_mode = 0
