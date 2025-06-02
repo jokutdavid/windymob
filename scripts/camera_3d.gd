@@ -12,6 +12,11 @@ var dragging: bool
 
 @export var ZOOM_MIN = 350
 @export var ZOOM_MAX = 3300
+@export_range(0, 1) var MODE = -1
+
+var target = Vector3(-90, 0, 0)
+
+var y_pressed = false
 
 func _ready():
 	Main = get_parent()
@@ -35,16 +40,29 @@ func _process(delta):
 	new_pos += input_vector * scroll_speed * delta / 1000 * position.y
 
 	
+
+	if MODE == 1:
+		target = Vector3(1, 1, 0) * -35
+		new_pos = Vector2(position.x, position.z)
+	if MODE == -1:
+		target = Vector3(1, 0, 0) * -90
 	
-	#at the end of frame makes sure that the viewport doesn't exit the usable frame using a buffer
+	if (target - rotation_degrees).length() > 1:
+		rotation_degrees += (target - rotation_degrees).normalized()
+	
+	if Input.is_key_label_pressed(KEY_Y):
+		if !y_pressed:
+			MODE = MODE * -1
+		y_pressed = true
+	else:
+		y_pressed = false
+	
+	
 	position.x = new_pos.x
 	position.z = new_pos.y
 	
+	#at the end of frame makes sure that the viewport doesn't exit the usable frame	
 	clamp_camera_position()
-	print(position)
-	#position.z = max(get_viewport().size.y / 2 - buffer, min(new_pos.y, Main.row_cols.y * 120 - get_viewport().size.y / 2 + buffer))
-	
-	
 	
 func _input(event):
 	var changed_y = position.y
@@ -54,9 +72,26 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			changed_y = changed_y * 0.9
 	
-	position.y = clamp(changed_y, ZOOM_MIN, ZOOM_MAX)
+		position.y = clamp(changed_y, ZOOM_MIN, ZOOM_MAX)
 		
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				dragging = true
+				drag_pos = event.position
+			else:
+				dragging = false
+	elif event is InputEventMouseMotion and dragging:
+		var from = get_viewport().get_camera_3d().project_position(drag_pos, position.y)
+		var to = get_viewport().get_camera_3d().project_position(event.position, position.y)
 
+		var delta_world = from - to
+		if MODE == -1:
+			position.x += delta_world.x
+			position.z += delta_world.z
+
+		drag_pos = event.position
+		
+		
 func clamp_camera_position():
 	var cam = self
 	

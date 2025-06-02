@@ -56,3 +56,5 @@ func _process(delta):
 		old_level = level
 		old_type = type
 		update_sprite()
+		
+		position.y = pow(level, 3) * 4 - level * 4

@@ -38,14 +38,13 @@ func _ready():
 		tile_grid.append([])
 		for x in Main.row_cols.x:
 			var tile_child = Tile.instantiate()
-			tile_child.position = Vector3(x, 0, y) * Main.tile_width
 			add_child(tile_child)
 			
 			tile_child.id = Vector2(x, y)
 			
 			
 		
-			var level: int
+			var level: float
 			
 			var value = noise.get_noise_2d(x, y) + 1
 			if value <= deep_ocean / 4:
@@ -65,7 +64,10 @@ func _ready():
 			elif value <= mountain_peak / 4:
 				level = 4
 			else:
-				level = 99
+				level = 0.9
+			
+			tile_child.position = Vector3(x, 0, y) * Main.tile_width
+			
 			
 			tile_child.id = Vector2(x, y)
 			tile_child.level = level
@@ -78,8 +80,6 @@ func _ready():
 			tile_grid[y].append(tile_child)
 	
 	hastar.update()
-	
-	
 	
 	surround_water_with_sand()
 
@@ -108,3 +108,8 @@ func surround_water_with_sand():
 					if tile_grid[y][x + 1].level > 0:
 						tile_grid[y][x + 1].level = 0
 			
+
+func world_to_map(world_pos: Vector2) -> Vector2i:
+	var cell_size = hastar.cell_size
+	var offset = hastar.region.position
+	return Vector2i(floor(world_pos.x / cell_size.x), floor(world_pos.y / cell_size.y)) - offset

@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://gnr82u435bg" path="res://scripts/tile.gd" id="1_ywnoi"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_ywnoi"]
+[sub_resource type="BoxMesh" id="BoxMesh_3dk36"]
+size = Vector3(1, 1, 5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3dk36"]
 
@@ -13,6 +14,6 @@ albedo_texture = SubResource("CompressedTexture2D_3dk36")
 script = ExtResource("1_ywnoi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(128, 0, 0, 0, -5.59506e-06, 128, 0, -128, -5.59506e-06, 64, 0, 64)
-mesh = SubResource("QuadMesh_ywnoi")
+transform = Transform3D(64, 0, 0, 0, -2.79753e-06, 64, 0, -64, -2.79753e-06, 32, -160, 32)
+mesh = SubResource("BoxMesh_3dk36")
 surface_material_override/0 = SubResource("StandardMaterial3D_jy7pm")
