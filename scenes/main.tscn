@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba8s10n0og28j"]
+[gd_scene load_steps=10 format=3 uid="uid://ba8s10n0og28j"]
 
 [ext_resource type="Script" uid="uid://ber26ejbwc8vw" path="res://scripts/main.gd" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://d3q6vukrp1w8v" path="res://scripts/tiles_node.gd" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://bti0vlrxyx3u6" path="res://scripts/game.gd" id="2_tefeu"]
 [ext_resource type="Script" uid="uid://cshywi32jjfji" path="res://scripts/camera_3d.gd" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://m852tmojdan3" path="res://scenes/building.tscn" id="3_tbgi4"]
 [ext_resource type="Script" uid="uid://ctyn22npyv884" path="res://scripts/gui.gd" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://qjid15y3rmo2" path="res://scenes/human.tscn" id="5_tipki"]
+[ext_resource type="Script" uid="uid://dfso60thmlyso" path="res://scripts/sun.gd" id="7_o6xl0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tipki"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_sugp2")
 row_cols = Vector2i(64, 32)
 
 [node name="Game" type="Node3D" parent="."]
+script = ExtResource("2_tefeu")
 
 [node name="TilesNode" type="Node3D" parent="Game"]
 script = ExtResource("2_jyhfs")
@@ -23,10 +29,23 @@ mountain = 6.4
 
 [node name="Buildings" type="Node3D" parent="Game"]
 
-[node name="Building" parent="Game/Buildings" instance=ExtResource("3_tbgi4")]
+[node name="House1" parent="Game/Buildings" instance=ExtResource("3_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 384, 0, 320)
 
 [node name="People" type="Node3D" parent="Game"]
+
+[node name="Human" parent="Game/People" instance=ExtResource("5_tipki")]
+
+[node name="SunLight" type="OmniLight3D" parent="Game"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 800, 0)
+light_bake_mode = 0
+omni_range = 8000.0
+script = ExtResource("7_o6xl0")
+
+[node name="TEST" type="MeshInstance3D" parent="Game/SunLight"]
+transform = Transform3D(200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 500, 0)
+visible = false
+mesh = SubResource("BoxMesh_tipki")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.011, 11, 0.052)
@@ -40,7 +59,3 @@ script = ExtResource("5_tbgi4")
 offset_right = 78.0
 offset_bottom = 40.0
 text = "59,9 FPS"
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.53, 0)
-light_bake_mode = 0

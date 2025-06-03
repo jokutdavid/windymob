@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://qjid15y3rmo2"]
+
+[ext_resource type="Script" uid="uid://ds5p2yjqbhs24" path="res://scripts/human.gd" id="1_cwf78"]
+[ext_resource type="Texture2D" uid="uid://b7t1oeups48gl" path="res://icon.svg" id="2_cwf78"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4otcn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mayv3"]
+albedo_texture = ExtResource("2_cwf78")
+
+[node name="Human" type="CharacterBody3D"]
+script = ExtResource("1_cwf78")
+speed = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-32, 2.79753e-06, -1.22284e-13, 0, -1.39876e-06, -32, -2.79753e-06, -32, 1.39876e-06, 32, 16, 32)
+mesh = SubResource("SphereMesh_4otcn")
+surface_material_override/0 = SubResource("StandardMaterial3D_mayv3")
